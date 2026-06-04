@@ -1,0 +1,44 @@
+<div class="login-page">
+  <div class="login-card">
+    <div class="mb-4">
+      <h1 class="h4 mb-1">Entrar no sistema</h1>
+      <p class="text-secondary mb-0">Acesse o controle de ativos.</p>
+    </div>
+
+    <form (ngSubmit)="entrar()">
+      <div class="mb-3">
+        <label for="email" class="form-label">Login</label>
+        <input
+          id="login"
+          type="text"
+          class="form-control"
+          placeholder="Digete seu login"
+          name="login"
+          [(ngModel)]="login"
+        />
+      </div>
+
+      <div class="mb-4">
+        <label for="password" class="form-label">Senha</label>
+        <input
+          id="password"
+          type="password"
+          class="form-control"
+          placeholder="Digite sua senha"
+          name="senha"
+          [(ngModel)]="senha"
+        />
+      </div>
+
+      <button type="button" class="btn btn-primary w-100" (click)="entrar()">      
+        Entrar
+      </button>
+
+      @if (erro) {
+        <div class="alert alert-danger mt-3 mb-0">
+          {{ erro }}
+        </div>
+      }
+    </form>
+  </div>
+</div>

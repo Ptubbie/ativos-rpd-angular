@@ -1,0 +1,19 @@
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../node_modules/bootstrap-icons/font/bootstrap-icons.min.css";
+
+:root {
+  --app-sidebar-width: 280px;
+  --app-bg: #f5f7fb;
+  --app-sidebar-bg: #172033;
+  --app-sidebar-active: #2d7df6;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--app-bg);
+}

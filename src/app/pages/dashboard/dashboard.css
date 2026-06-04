@@ -1,0 +1,20 @@
+.page-header {
+  border-bottom: 1px solid #dce3ef;
+  padding-bottom: 16px;
+}
+
+.stat-card {
+  border: 0;
+  border-radius: 8px;
+  box-shadow: 0 10px 28px rgba(18, 31, 53, 0.08);
+}
+
+.stat-card .card-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stat-card strong {
+  font-size: 2rem;
+}

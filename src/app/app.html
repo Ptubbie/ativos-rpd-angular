@@ -1,0 +1,71 @@
+@if (router.url === '/login') {
+  <router-outlet />
+} @else {
+  <div
+    class="app-shell"
+    [class.sidebar-collapsed]="sidebarCollapsed"
+    [class.mobile-sidebar-open]="mobileSidebarOpen"
+  >
+    <aside class="sidebar">
+      <div class="sidebar-brand">        
+        <img src="/assets/images/lg-login-escuro.png"
+             alt="Logo"
+             class="logo logo-full"
+          />
+
+        <img src="/assets/images/lg-mini.png"
+             alt="Logo"
+             class="logo logo-mini"
+          />
+      </div>
+
+      <nav class="nav flex-column gap-2">
+        @for (item of menuItems; track item.route) {
+          <a
+            class="nav-link sidebar-link"
+            [routerLink]="item.route"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="fecharMobileSidebar()"
+          >
+            @if (item.icon) {
+              <i class="sidebar-icon" [class]="item.icon" aria-hidden="true"></i>
+            }
+            <span class="sidebar-label">{{ item.label }}</span>
+          </a>
+        }
+      </nav>
+    </aside>
+
+    <div class="mobile-backdrop" (click)="fecharMobileSidebar()"></div>
+    <section class="main-area">
+      <header class="topbar">
+        <button class="btn btn-light toggle-desktop" type="button" (click)="toggleSidebar()">
+          <i class="bi bi-list"></i>
+        </button>
+
+        <button class="btn btn-light toggle-mobile" type="button" (click)="toggleMobileSidebar()">
+          <i class="bi bi-list"></i>
+        </button>
+
+        <div class="topbar-title">
+          <h5>Controle de Ativos</h5>
+          <small class="text-muted">Gerenciamento de Ativos</small>
+        </div>
+
+        <div class="user-profile">
+          <div class="user-info">
+            <strong>{{ nomeUsuario }}</strong>
+            <small>Administrador</small>
+          </div>
+
+          <img [src]="avatarUsuario" alt="Avatar do usuário" class="user-avatar" />
+        </div>
+      </header>
+
+      <main class="content">
+        <router-outlet />
+      </main>
+    </section>
+  </div>
+}

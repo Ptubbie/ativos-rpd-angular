@@ -1,0 +1,48 @@
+<div class="login-page">
+    <div class="login-card shadow-lg border-0">
+        <div class="login-left d-none d-lg-flex">
+          <div>            
+            <img src="/assets/images/lg-login-escuro.png" alt="Logo">                 
+          </div>
+        </div>
+
+        <div class="login-right bg-white">
+          <div class="w-100" style="Width: 350">
+            <h2 class="fw-bold mb-2">Bem-vindo</h2>
+            <p class="text-muted opacity-80">Sistema de gerenciamento de ativos.</p>           
+
+            <form (ngSubmit)="entrar()">
+                <div class="mb-3">
+                    <label class="form-label">Login:</label>
+                    <input class="form-control" 
+                        id="login" 
+                        type="text"
+                        placeholder="Digete seu login"
+                        name="login"
+                        [(ngModel)]="login"
+                    />
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Senha:</label>
+                    <input class="form-control" 
+                        id="password" 
+                        type="password" 
+                        placeholder="Digite sua senha"
+                        name="senha"
+                        [(ngModel)]="senha"
+                    />
+                </div>
+
+                <button type="button" class="btn btn-primary w-100" (click)="entrar()">
+                    Entrar
+                </button>
+            </form>
+
+            <div class='rodape'>
+              <small>Desenvolvido 2026 - Paulo Santos</small>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
