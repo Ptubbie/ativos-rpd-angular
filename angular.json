@@ -58,6 +58,12 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "host": "0.0.0.0",
+            "allowedHosts": [
+              "8aff09a6254f.sn.mynetname.net"
+            ]
+          },
           "configurations": {
             "production": {
               "buildTarget": "ativos-angular:build:production"

@@ -11,30 +11,24 @@
             <h2 class="fw-bold mb-2">Bem-vindo</h2>
             <p class="text-muted opacity-80">Sistema de gerenciamento de ativos.</p>           
 
-            <form (ngSubmit)="entrar()">
+            <form [formGroup]="form" (ngSubmit)="entrar()">
                 <div class="mb-3">
-                    <label class="form-label">Login:</label>
-                    <input class="form-control" 
-                        id="login" 
-                        type="text"
-                        placeholder="Digete seu login"
-                        name="login"
-                        [(ngModel)]="login"
+                    <label class="form-label" for="login">Login:</label>
+                    <input class="form-control" id="login" type="text" placeholder="Digete seu login"
+                        formControlName="login"
+                        [class.is-invalid]="form.controls.login.touched && form.controls.login.invalid"
                     />
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label">Senha:</label>
-                    <input class="form-control" 
-                        id="password" 
-                        type="password" 
-                        placeholder="Digite sua senha"
-                        name="senha"
-                        [(ngModel)]="senha"
+                    <label class="form-label" for="password">Senha:</label>
+                    <input class="form-control" id="password" type="password" placeholder="Digite sua senha"
+                        formControlName="senha"
+                        [class.is-invalid]="form.controls.senha.touched && form.controls.senha.invalid"
                     />
                 </div>
 
-                <button type="button" class="btn btn-primary w-100" (click)="entrar()">
+                <button type="submit" class="btn btn-primary w-100" [disabled]="form.invalid">
                     Entrar
                 </button>
             </form>

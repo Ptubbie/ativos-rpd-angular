@@ -1,32 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { Auth } from '../../services/auth';
-import Swal from 'sweetalert2';
+import { Auth } from '../../core/services/auth';
+import { ToastService } from '../../core/services/toast';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
 export class Login {
-  login = '';
-  senha = '';
-  erro = '';
+  private readonly fb = inject(FormBuilder);
+  private readonly auth = inject(Auth);
+  private readonly router = inject(Router);
+  private readonly toast = inject(ToastService);
 
-  constructor(
-    private auth: Auth,
-    private router: Router
-  ) {}
+  readonly form = this.fb.nonNullable.group({
+    login: ['', [Validators.required]],
+    senha: ['', [Validators.required]]
+  });
 
-  entrar() {
-    this.erro = '';
-    
-    this.auth.login({
-      login: this.login,
-      senha: this.senha
-    }).subscribe({
+  public entrar() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      this.toast.aviso('Preencha login e senha para continuar.');
+      return;
+    }
+
+    const { login, senha } = this.form.getRawValue();
+
+    this.auth.login({ login, senha }).subscribe({
       next: (resposta) => {
         if (resposta.success && resposta.token) {
           localStorage.setItem('token', resposta.token);
@@ -34,25 +38,15 @@ export class Login {
           localStorage.setItem('id_usuario', String(resposta.id_usuario ?? ''));
           localStorage.setItem('nome_usuario', resposta.nome ?? '');
 
-          this.router.navigate(['/dashboard']);
+          this.toast.sucesso(resposta.msg, 'Sucesso.');
+          this.router.navigate(['/dashboard']); 
           return;
         }
 
-        Swal.fire({
-          icon: 'error',
-          title: 'Acesso negado',
-          text: 'Login ou senha inválidos.',
-          confirmButtonText: 'Ok'
-        });
-
+        this.toast.erro(resposta.msg, 'Acesso negado');
       },
       error: () => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Erro na conexão',
-          text: 'Não foi possível conectar com a API.',
-          confirmButtonText: 'Ok'
-        });
+        this.toast.erro('Não foi possível conectar com a API.', 'Erro na conexão');
       }
     });
   }
