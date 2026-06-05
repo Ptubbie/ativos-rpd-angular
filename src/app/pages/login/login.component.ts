@@ -1,18 +1,18 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Auth } from '../../core/services/auth';
 import { ToastService } from '../../core/services/toast';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule],
-  templateUrl: './login.html',
-  styleUrl: './login.css'
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css'
 })
-export class Login {
+export class LoginComponent {
   private readonly fb = inject(FormBuilder);
-  private readonly auth = inject(Auth);
+  private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
   private readonly toast = inject(ToastService);
 

@@ -7,7 +7,7 @@ import { LoginRequest, LoginResponse } from '../model/login-model';
   providedIn: 'root'
 })
 
-export class Auth {
+export class AuthService {
   private apiUrl = 'http://localhost:3001';
 
   constructor(private http: HttpClient) {}

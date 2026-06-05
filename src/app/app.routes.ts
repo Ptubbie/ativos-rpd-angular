@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { Login } from './pages/login/login';
 import { Dashboard } from './pages/dashboard/dashboard';
 import { Setores } from './pages/setores/setores';
 import { Funcionarios } from './pages/funcionarios/funcionarios';
@@ -10,10 +9,11 @@ import { Manutencoes } from './pages/manutencoes/manutencoes/manutencoes';
 import { Relatorios } from './pages/relatorios/relatorios/relatorios';
 import { authGuard } from './guards/auth-guard';
 import { loginGuard } from './guards/login-guard';
+import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
-  { path: 'login', component: Login, canActivate: [loginGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [loginGuard] },
   { path: 'dashboard', component: Dashboard, canActivate: [authGuard] },
   { path: 'setores', component: Setores, canActivate: [authGuard] },
   { path: 'funcionarios', component: Funcionarios, canActivate: [authGuard] },
