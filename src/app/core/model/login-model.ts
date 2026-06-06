@@ -6,7 +6,7 @@ export interface LoginRequest {
   export interface LoginResponse {
     success: boolean;
     msg: string;
-    id_usuario?: number;
+    id_usuario?: string;
     nome?: string;
     token?: string;
     token_session?: string;

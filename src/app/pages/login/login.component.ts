@@ -28,14 +28,14 @@ export class LoginComponent {
       return;
     }
 
-    const { login, senha } = this.form.getRawValue();
+    const payload = this.form.getRawValue();
 
-    this.auth.login({ login, senha }).subscribe({
+    this.auth.login(payload).subscribe({
       next: (resposta) => {
         if (resposta.success && resposta.token) {
           localStorage.setItem('token', resposta.token);
           localStorage.setItem('token_session', resposta.token_session ?? '');
-          localStorage.setItem('id_usuario', String(resposta.id_usuario ?? ''));
+          localStorage.setItem('id_usuario', resposta.id_usuario ?? '');
           localStorage.setItem('nome_usuario', resposta.nome ?? '');
 
           this.toast.sucesso(resposta.msg, 'Sucesso.');
